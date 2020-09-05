@@ -1,34 +1,62 @@
-import React from 'react';
-import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
+import React, { useState } from 'react'; 
+import { 
+    View, 
+    StyleSheet, 
+    Text, 
+    TextInput, 
+    Button, 
+    TouchableWithoutFeedback,
+    Keyboard } from 'react-native';
 import Card from '../components/Card';
 import Colors from '../constants/colors';
-
+import Input from '../components/Input';
 
 const StartGameScreen = props => {
+    const [enteredValue, setEnteredValue] = useState('');
+
+    const numberInputHandler = inputText => {
+        //validate input to remove anything that's not an number
+        setEnteredValue(inputText.replace(/[^0-9]/g, ''));
+    };
+
+
     return (
-        <View style={ styles.screen }>
-            <Text style={ styles.title }>Start a New Game!</Text>
-            <Card style={styles.inputContainer}>
-                <Text>Select a Number:</Text>
-                <TextInput  />
-                <View style={ styles.buttonContainer }>
-                    <Button 
-                        title="Reset" 
-                        style={styles.button}
-                        color={Colors.primary}
-                        // onPress={() => {}}
-                        accessibilityLabel= "button to reset the text input field" 
-                    />
-                    <Button 
-                        title="Confirm" 
-                        style={styles.button}
-                        color={Colors.accent}
-                        // onPress={() => {}}
-                        accessibilityLabel= "button to reset the text input field"
-                    />
-                </View>
-            </Card>
-        </View>
+        <TouchableWithoutFeedback onPress={() => {
+            Keyboard.dismiss();
+        }}>
+
+            <View style={ styles.screen }>
+                <Text style={ styles.title }>Start a New Game!</Text>
+                <Card style={styles.inputContainer}>
+                    <Text>Select a Number:</Text>
+                    <Input 
+                        blurOnSubmit
+                        autoCapitalize='none'
+                        autoCorrect={false}
+                        keyboardType='number-pad'
+                        maxLength={2}
+                        style={styles.input}
+                        onChangeText={numberInputHandler}
+                        value={enteredValue} />
+                    <View style={ styles.buttonContainer }>
+                        <Button 
+                            title="Reset" 
+                            style={styles.button}
+                            color={Colors.primary}
+                            // onPress={() => {}}
+                            accessibilityLabel= "button to reset the text input field" 
+                        />
+                        <Button 
+                            title="Confirm" 
+                            style={styles.button}
+                            color={Colors.accent}
+                            // onPress={() => {}}
+                            accessibilityLabel= "button to reset the text input field"
+                        />
+                    </View>
+                </Card>
+            </View>
+        </TouchableWithoutFeedback>
     )
 };
 
@@ -57,6 +85,10 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 100
+    },
+    input: {
+        width: 130,
+        textAlign: 'center'
     }
 });
 
