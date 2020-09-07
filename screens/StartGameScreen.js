@@ -15,7 +15,7 @@ const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
 
     const numberInputHandler = inputText => {
-        //validate input to remove anything that's not an number
+        //validate input to remove anything that's not an number, using reges for only numbers, replace anything that isn't with empty space.
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
     };
 
