@@ -13,6 +13,8 @@ import Input from '../components/Input';
 
 const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
+    const [confirmed, setConfirmed] = useState(false);
+    const [selectedNumber, setSelectedNumber] = useState('');
 
     const numberInputHandler = inputText => {
         //validate input to remove anything that's not an number, using reges for only numbers, replace anything that isn't with empty space.
@@ -21,8 +23,24 @@ const StartGameScreen = props => {
 
     const resetInputHandler = () => {
         setEnteredValue('');
+        setConfirmed(false);
     };
 
+    const confirmInputHandler = () => {
+        const chosenNumber = parseInt(enteredValue);
+        if (chosenNumber === NaN || chosenNumber <= 0 || chosenNumber > 99) {
+            return;
+        }
+
+        setConfirmed(true);
+        setSelectedNumber(parseInt(enteredValue)); //entire the enteredValue is set as an interger
+        setEnteredValue('');
+    };
+
+    let confirmedOutput;
+    if (confirmed) {
+    confirmedOutput = <Text>Chosen Number: {selectedNumber}</Text>
+    }
 
     return (
         <TouchableWithoutFeedback onPress={() => {
@@ -54,11 +72,12 @@ const StartGameScreen = props => {
                             title="Confirm" 
                             style={styles.button}
                             color={Colors.accent}
-                            // onPress={() => {}}
+                            onPress={confirmInputHandler}
                             accessibilityLabel= "button to reset the text input field"
                         />
                     </View>
                 </Card>
+                {confirmedOutput}
             </View>
         </TouchableWithoutFeedback>
     )
