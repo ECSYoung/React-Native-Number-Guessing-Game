@@ -19,6 +19,10 @@ const StartGameScreen = props => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
     };
 
+    const resetInputHandler = () => {
+        setEnteredValue('');
+    };
+
 
     return (
         <TouchableWithoutFeedback onPress={() => {
@@ -43,7 +47,7 @@ const StartGameScreen = props => {
                             title="Reset" 
                             style={styles.button}
                             color={Colors.primary}
-                            // onPress={() => {}}
+                            onPress={resetInputHandler}
                             accessibilityLabel= "button to reset the text input field" 
                         />
                         <Button 
