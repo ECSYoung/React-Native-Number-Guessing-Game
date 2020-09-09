@@ -80,20 +80,23 @@ const StartGameScreen = props => {
                         onChangeText={numberInputHandler}
                         value={enteredValue} />
                     <View style={ styles.buttonContainer }>
-                        <Button 
-                            title="Reset" 
-                            style={styles.button}
-                            color={Colors.primary}
-                            onPress={resetInputHandler}
-                            accessibilityLabel= "button to reset the text input field" 
-                        />
-                        <Button 
-                            title="Confirm" 
-                            style={styles.button}
-                            color={Colors.accent}
-                            onPress={confirmInputHandler}
-                            accessibilityLabel= "button to reset the text input field"
-                        />
+                        <View style={styles.buttons}>
+                            <Button 
+                                title="Reset" 
+                                style={styles.buttons}
+                                color={Colors.primary}
+                                onPress={resetInputHandler}
+                                accessibilityLabel= "button to reset the text input field" 
+                            />
+                        </View>
+                        <View style={styles.buttons}>
+                            <Button 
+                                title="Confirm" 
+                                color={Colors.accent}
+                                onPress={confirmInputHandler}
+                                accessibilityLabel= "button to reset the text input field"
+                            />
+                        </View>
                     </View>
                 </Card>
                 {confirmedOutput}
@@ -115,9 +118,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: 300,
         maxWidth: '80%',
-        alignItems: 'center',
-        // borderWidth: 2,
-        // borderColor: '#f7287b'
+        alignItems: 'center'
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -125,8 +126,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 15
     },
-    button: {
-        width: 100
+    buttons: {
+        width: 100,
+        minWidth: 100,
+        borderRadius: 10
     },
     input: {
         width: 130,
